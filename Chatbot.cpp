@@ -1,5 +1,5 @@
 #include "Chatbot.h"
-<<<<<<< HEAD
+
 #include <pthread.h>
 #include <stdio.h>
 #include <iostream>
@@ -20,7 +20,7 @@ void *getID(void *threadid){
 	tid = (long) threadid;
 	ofstream quote;
 	quote.open("Quote.txt");
-	quote << "Thread ", tid, "is running";	
+	quote << "Thread ", tid, "is running";
 }
 
 int main(int argc, char *argv[]){
@@ -45,5 +45,3 @@ int main(int argc, char *argv[]){
     		}			
  	}
 }
-=======
->>>>>>> 24f9660d28d7d317727a1846948f0e0161956c40

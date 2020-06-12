@@ -1,7 +1,7 @@
 #ifndef BOTS_H
 #define BOTS_h
 
-#include "chatbot.h"
+#include "Chatbot.h"
 #include <fstream>
 
 class bots{

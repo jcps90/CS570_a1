@@ -7,11 +7,10 @@
 # Filename: Makefile
 #
 # ######################################################
-
-CC = gcc
-CFLAGS='-I'
+CC=gcc
+CFLAGS=-I
 DEPS=bots.h
-OBJ = main.o bots.o chatbot.o
+OBJ=main.o bots.o chatbot.o
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
