@@ -1,13 +1,12 @@
-//#include "Chatbot.h"
+#include "bots.h"
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
+using namespace std;
 
-//using namespace std;
 
 int main(int argc, char **argv){
-    pid_t pid = getpid();
-    printf("pid: %lun", pid);
     return 0;
 }
 

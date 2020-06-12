@@ -1,4 +1,5 @@
 #include "Chatbot.h"
+<<<<<<< HEAD
 #include <pthread.h>
 #include <stdio.h>
 #include <iostream>
@@ -44,3 +45,5 @@ int main(int argc, char *argv[]){
     		}			
  	}
 }
+=======
+>>>>>>> 24f9660d28d7d317727a1846948f0e0161956c40
