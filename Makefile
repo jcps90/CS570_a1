@@ -8,17 +8,14 @@
 #
 # ######################################################
 
-EXEC = bots
-FILES = main.cpp Chatbot.cpp
-CC = g++
-LFLAGS = -lm -o
-CFLAGS = -lm -o
+CC = gcc
+CFLAGS='-I'
+DEPS=bots.h
+OBJ = main.o bots.o chatbot.o
 
-$(EXEC):$(FILES)
-	$(CC) -std=c++11 $(FILE) $(LFLAGS) $(EXEC)
-clean:
-	rm -f *.o $(EXEC)
-
-.PHONY: all bots clean
+%.o: %.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+bots: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
 ####################[ EOF: Makefile ]##################
 
