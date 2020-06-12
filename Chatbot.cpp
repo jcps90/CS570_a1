@@ -28,8 +28,15 @@ int main(int argc, char *argv[]){
 	int run;
 	for (run = 0; run<= runCount; run++){
 		for(t=0; t<NUM_THREADS; t++){
-       		
+       			int i=0;
+			if (int i<1){
+				sem_wait(2);
+			}else{
+				sem_wait(1);
+			}
+				
        			rc = pthread_create(&threads[t], NULL, getID, (void *)t);
+			i++;
        			if (rc){
           			printf("ERROR; return code from pthread_create() is %d\n", rc);
           			exit(-1);
