@@ -7,5 +7,6 @@
 class bots{
 	public:
 		void createFile();
+};
 #endif 
 

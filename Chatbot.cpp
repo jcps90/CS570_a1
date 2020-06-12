@@ -7,7 +7,7 @@
 #include <semaphore.h>
 
 using namespace std;
-#define num_thread 7
+#define NUM_THREADS 7
 typedef int semaphore;
 semaphore FLAG = 1;
 int runCount = 8;
@@ -24,7 +24,7 @@ void *getID(void *threadid){
 }
 
 int main(int argc, char *argv[]){
-	pthread_t threads[num_thread];
+	pthread_t threads[NUM_THREADS];
 	long t;
 	int run;
 	for (run = 0; run<= runCount; run++){
