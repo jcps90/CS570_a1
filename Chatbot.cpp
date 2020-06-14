@@ -1,47 +1,25 @@
 #include "Chatbot.h"
-
-#include <pthread.h>
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
-#include <semaphore.h>
-
 using namespace std;
-#define NUM_THREADS 7
-typedef int semaphore;
-semaphore FLAG = 1;
-int runCount = 8;
 
 
-
-
-void *getID(void *threadid){
-	long tid;
-	tid = (long) threadid;
-	ofstream quote;
-	quote.open("Quote.txt");
-	quote << "Thread ", tid, "is running";
-}
-
-int main(int argc, char *argv[]){
-	pthread_t threads[NUM_THREADS];
-	long t;
-	int run;
-	for (run = 0; run<= runCount; run++){
-		for(t=0; t<NUM_THREADS; t++){
-       			int i=0;
-			if (int i<1){
-				sem_wait(2);
-			}else{
-				sem_wait(1);
-			}
-				
-       			rc = pthread_create(&threads[t], NULL, getID, (void *)t);
-			i++;
-       			if (rc){
-          			printf("ERROR; return code from pthread_create() is %d\n", rc);
-          			exit(-1);
-       			}
-    		}			
- 	}
+void *print(void *threadid){
+	string a,b;
+    long tid;
+    tid = (long) threadid;
+    ofstream quote;
+    a = "Thread ";
+    b = " is running. \n";
+    quote.open("QUOTE.txt");
+    if(tid % 2 == 0){                //if modulo is 0 then tid is even, hence print quote 1
+        quote << tid << " Controlling complexity is the essence of computer programming.\r\n";
+        cout << a << tid << b;
+    }
+    else{                            //modulo not 0 then tid is odd hence print quote 2
+        quote << tid << " Computer science is no more about computers than astronomy is about telescopes. \r\n";
+        cout << a << tid << b;
+    }
+    quote.close();
 }

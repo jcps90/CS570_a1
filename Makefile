@@ -10,7 +10,7 @@
 EXEC = bots
 CC=g++
 $(EXEC):
-	$(CC) -o $(EXEC) main.cpp Chatbot.cpp
+	$(CC) -o $(EXEC) main.cpp Chatbot.cpp -lpthread
 	rm -f *.o
 clean:
 	rm -f *.o core a.out $(EXEC)
