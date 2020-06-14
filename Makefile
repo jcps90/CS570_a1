@@ -6,15 +6,13 @@
 # Assignment 1
 # Filename: Makefile
 #
-# ######################################################
-CC=gcc
-CFLAGS=-I
-DEPS=bots.h
-OBJ=main.o bots.o chatbot.o
-
-%.o: %.cpp $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-bots: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+#######################################################
+EXEC = bots
+CC=g++
+$(EXEC):
+	$(CC) -o $(EXEC) main.cpp Chatbot.cpp
+	rm -f *.o
+clean:
+	rm -f *.o core a.out $(EXEC)
 ####################[ EOF: Makefile ]##################
 
