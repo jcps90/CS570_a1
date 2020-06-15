@@ -10,9 +10,11 @@
 EXEC = bots
 CC=g++
 $(EXEC):
-	$(CC) -o $(EXEC) main.cpp Chatbot.cpp -lpthread
+	$(CC) -o $(EXEC) main.cpp -lpthread
 	rm -f *.o
 clean:
+	rm bots
+	rm QUOTE.txt
 	rm -f *.o core a.out $(EXEC)
 ####################[ EOF: Makefile ]##################
 
