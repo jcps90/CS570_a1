@@ -1,106 +1,80 @@
 //#include "Chatbot.h"
 #include "main.h"
 
-#define NUM_THREADS 6
+#define NUM_THREADS 6				// Threads go from 0 to 6, so 7 in total
 
 sem_t FLAG;
 using namespace std;
 
-void *printThreadEven(void *threadid){
-	string a,b;
+void *printThreadEven(void *threadid){		//even thread printer	
+    string a,b;					// made strings for ease of printing
     long tid;
-    tid = (long)threadid + 1;
+    tid = (long)threadid + 1;			//for more conventional naming scheme 1-7 instead of 0-6
 
     ofstream quote;
-    a = "Thread ";
+    a = "Thread ";				//ease of printing
     b = " is running. \n";
     
-    sem_wait(&FLAG);
-    quote.open("QUOTE.txt", std::ios_base::app);
-    //if modulo is 0 then tid is even, hence print quote 1
-    quote << tid << " Controlling complexity is the essence of computer programming." << "\r\n";
-    cout << a << tid << b << endl;
-    quote.close();
+    sem_wait(&FLAG);				//waits until previous thread finishes
+    quote.open("QUOTE.txt", std::ios_base::app);//opens file to print to
+    quote << tid << " Controlling complexity is the essence of computer programming." << "\r\n";	//prints into the file
+    cout << a << tid << b << endl;		//prints to console
+    quote.close();				//closes file that was writen into
     sem_post(&FLAG);
     pthread_exit(NULL);
 }
 
-void *printThreadOdd(void *threadid){
-    string a,b;
+void *printThreadOdd(void *threadid){		//odd thread printer
+    string a,b;					// made strings for ease of printing
     long tid;
-    tid = (long)threadid + 1;
+    tid = (long)threadid + 1;			//for more conventional naming scheme 1-7 instead of 0-6
 
     ofstream quote;
-    a = "Thread ";
+    a = "Thread ";				//ease of printing
     b = " is running. \n";
 
-    sem_wait(&FLAG);
-    quote.open("QUOTE.txt", std::ios_base::app);
-    //modulo not 0 then tid is odd hence print quote 2
-    quote << tid << " Computer science is no more about computers than astronomy is about telescopes." << "\r\n";
-    cout << a << tid << b << endl;
-    quote.close();
+    sem_wait(&FLAG);				//waits until previous thread finishes
+    quote.open("QUOTE.txt", std::ios_base::app);//opens file to print to
+    quote << tid << " Computer science is no more about computers than astronomy is about telescopes." << "\r\n";	//prints into the file	
+    cout << a << tid << b << endl;		//prints to console
+    quote.close();				//closes file that was writen into
     sem_post(&FLAG);
     pthread_exit(NULL);
 }
+int main(int argc, char *argv[]){		//main
 
-/*
-void *easyPrint(void *threadID){
-    string msg = "printing is so easy: ";
-    long tID = (long) threadID;
-    ofstream openFile;
-    sem_wait(&FLAG);
-    openFile.open("QUOTE.txt");
-    cout << msg << tID << "\n" << endl;
-    openFile << msg << tID << "\n" << endl;
-    sem_post(&FLAG);
-    pthread_exit(0);
-
-}*/
-
-int main(int argc, char *argv[]){
-
-    // [0] = chatbot #1, [1] = chatbot #2, [2] = chatbot #3,  3 = 4,  4 = 5, 5 = 6, 6 = 7 
+    // [0] = chatbot #1, [1] = chatbot #2, [2] = chatbot #3,  [3] = chatbot #4,  [4] = chatbot #5, [5] = chatbot #6, [6] = chatbot #7 
     pthread_t chatbots[NUM_THREADS]; //establishes an array of pthread_t type variables
     
     ofstream outfile("QUOTE.txt");
-    cout << "Process ID: " << getpid() << "\n" << endl;
-    outfile << "Process ID: " << getpid() << "\r\n";
-    outfile.close();
-    //outfile << "Process ID: " << getpid() << "\r\n";
-    //outfile.close();
+    cout << "Process ID: " << getpid() << "\n" << endl;	//prints process ID to console 
+    outfile << "Process ID: " << getpid() << "\r\n";	//prints precess ID to the QUOTE.txt file
+    outfile.close();					//closes file
     
     int tr;
-    cout << "Running bots Now" << endl;
-    /*int i = 3;
-    sem_init(&FLAG,0,1);
-    tr = pthread_create(&chatbots[i], NULL, printThread, (void *) i);
-    pthread_join(chatbots[i],NULL);
-    sem_destroy(&FLAG);
-    */
+    //cout << "Running bots Now" << endl;	//for testing the run 
     
     sem_init(&FLAG,0,1); //initialize semaphore
-    int r;
-    long i;
-    for(r =0; r <= 8; r++){
-        
-        for(i = 0; i <= NUM_THREADS; i++){
-            if(i % 2 == 0){
-                sleep(3);
-                tr = pthread_create(&chatbots[i], NULL, printThreadOdd, (void*) i);
+    int r;						//outisde loop variable
+    long i;						//inside bots variable
+    for(r =0; r <= 8; r++){				//outside loop of 8, to allow the seven threads to repeat
+        for(i = 0; i <= NUM_THREADS; i++){		//prints seven threads
+            if(i % 2 == 0){				//if modulo is 0 then the thread number is odd due the array design
+                sleep(3);				//wait 3 seconds because odd
+                tr = pthread_create(&chatbots[i], NULL, printThreadOdd, (void*) i);	//creates pthread, that calls printThreadOdd
             }
-            else{
-                sleep(2);
-                tr = pthread_create(&chatbots[i], NULL, printThreadEven, (void *) i);
+            else{					//if anything else besides 0, then the thread is even
+                sleep(2);				//wait 2 seconds because even
+                tr = pthread_create(&chatbots[i], NULL, printThreadEven, (void *) i);	//creates pthread, that calls printThreadEven
             }
-            cout << "i = " << i << endl;
+            //cout << "i = " << i << endl; //for testing for loop		
         }
-        sleep(1);
-        cout << "# of runs = " << r << endl;
-        i = 0;
+        sleep(1);				//wait one secodn bedore continuing the loop
+        //cout << "# of runs = " << r << endl; //for testing the outside for loop
+        i = 0;					//set i to 0 to allow for more runs
     }
 
     sem_destroy(&FLAG);
-    cout << "Thank You for Talking to us! :) " << endl;
+    cout << "Thank You for Talking to us! :) " << endl;		//chatbots being friendly
     return 0;
-}
+}//main
