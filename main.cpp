@@ -1,4 +1,10 @@
-//#include "Chatbot.h"
+
+// Authors: Juan Pina-Sanz, Mikhail Mineev
+// Users: cssc2147, cssc2160
+// Class: CS 570, Summer 2020
+// Assignment 1
+// Filename: Makefile
+
 #include "main.h"
 
 #define NUM_THREADS 6				// Threads go from 0 to 6, so 7 in total
