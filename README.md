@@ -7,7 +7,7 @@ Class: CS 570, Summer 2020
 
 Assignment 1
 
-Filename: Makefile
+Filename: README 
 
 
 
@@ -20,12 +20,13 @@ File Manifest:  Makefile
 
 
 Compile Instructions
+		Compile and Run on Class Account: cssc2147
                 Call the make command
 
 
 
 Operation Instructions
-                Run the bots file that was created by the "make" command\
+                Run the bots file that was created by the "make" command
 
 
 
